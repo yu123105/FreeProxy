@@ -33,6 +33,9 @@ public class IpIterator {
         }
         return currentIpData[0] + "." + currentIpData[1] + "." + currentIpData[2] + "." + currentIpData[3];
     }
+    public String getCurrentIp(){
+        return currentIpData[0] + "." + currentIpData[1] + "." + currentIpData[2] + "." + currentIpData[3];
+    }
     public Boolean hasNextIp(){
         return (currentIpData[0] < maxIpData[0] || currentIpData[1] < maxIpData[1] || currentIpData[2] < maxIpData[2] || currentIpData[3] < maxIpData[3]);
     }
