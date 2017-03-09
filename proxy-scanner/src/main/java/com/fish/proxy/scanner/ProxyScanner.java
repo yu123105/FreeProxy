@@ -1,5 +1,9 @@
 package com.fish.proxy.scanner;
 
+import com.fish.proxy.scanner.component.ScannerResultHandler;
+import com.fish.proxy.scanner.component.ScannerTaskExecutor;
+import com.fish.proxy.scanner.component.ScannerTaskFactory;
+
 /**
  * Created by Administrator on 2017/3/9 0009.
  */
@@ -18,9 +22,11 @@ public class ProxyScanner {
         scannerTaskFactory = DEFAULT_TASK_FACTORY;
     }
 
+
+
     public void start(){
         while (true){
-            scannerResultHandler.handle(scannerTaskExecutor.excute(scannerTaskFactory.createTask()));
+            scannerResultHandler.handle(scannerTaskExecutor.execute(scannerTaskFactory.createTask()));
         }
     }
 }

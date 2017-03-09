@@ -22,11 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="FreeProxy" />
+        <module name="proxy-scanner" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="FreeProxy" target="1.5" />
+      <module name="proxy-scanner" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.fish.proxy.scanner;
+package com.fish.proxy.scanner.bean;
 
 /**
  * 扫描结果
