@@ -1,8 +1,8 @@
 package com.fish.proxy.scanner.component;
 
-import com.fish.proxy.scanner.bean.RequestResult;
-import com.fish.proxy.scanner.bean.ScannerResult;
-import com.fish.proxy.scanner.bean.ScannerTask;
+import com.fish.proxy.scanner.RequestResult;
+import com.fish.proxy.scanner.ScannerResult;
+import com.fish.proxy.scanner.ScannerTask;
 
 /**
  * 任务执行器

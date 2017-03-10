@@ -1,7 +1,5 @@
-package com.fish.proxy.scanner.utils;
+package com.fish.proxy.utils;
 
-
-import sun.net.util.IPAddressUtil;
 
 import java.util.Arrays;
 

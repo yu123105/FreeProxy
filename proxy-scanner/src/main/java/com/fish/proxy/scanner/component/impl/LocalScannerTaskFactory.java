@@ -1,8 +1,8 @@
 package com.fish.proxy.scanner.component.impl;
 
-import com.fish.proxy.scanner.bean.ScannerTask;
+import com.fish.proxy.scanner.ScannerTask;
 import com.fish.proxy.scanner.component.ScannerTaskFactory;
-import com.fish.proxy.scanner.utils.IpIterator;
+import com.fish.proxy.scanner.IpIterator;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

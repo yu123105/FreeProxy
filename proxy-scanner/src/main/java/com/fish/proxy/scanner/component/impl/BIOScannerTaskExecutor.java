@@ -1,7 +1,5 @@
 package com.fish.proxy.scanner.component.impl;
 
-import com.fish.proxy.scanner.bean.RequestResult;
-import com.fish.proxy.scanner.bean.ScannerTask;
 import com.fish.proxy.scanner.component.ScannerTaskExecutor;
 
 import java.net.HttpURLConnection;

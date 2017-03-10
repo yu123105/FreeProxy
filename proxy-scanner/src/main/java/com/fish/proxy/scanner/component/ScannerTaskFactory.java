@@ -1,6 +1,6 @@
 package com.fish.proxy.scanner.component;
 
-import com.fish.proxy.scanner.bean.ScannerTask;
+import com.fish.proxy.scanner.ScannerTask;
 
 /**
  * Created by Administrator on 2017/3/9 0009.

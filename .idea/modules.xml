@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FreeProxy.iml" filepath="$PROJECT_DIR$/FreeProxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy-common/proxy-common.iml" filepath="$PROJECT_DIR$/proxy-common/proxy-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy-scanner/proxy-scanner.iml" filepath="$PROJECT_DIR$/proxy-scanner/proxy-scanner.iml" />
     </modules>
   </component>

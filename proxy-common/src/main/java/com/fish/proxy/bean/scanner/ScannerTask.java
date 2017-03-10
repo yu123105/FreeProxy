@@ -1,4 +1,4 @@
-package com.fish.proxy.scanner.bean;
+package com.fish.proxy.bean.scanner;
 
 import java.io.Serializable;
 
