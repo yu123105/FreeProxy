@@ -49,7 +49,7 @@ public class IpIterator {
     private Boolean isIpStrValid(String ip){
         if(ip.matches("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}")){
             String s[] = ip.split("\\.");
-             return Integer.parseInt(s[0])<255 && Integer.parseInt(s[1])<255 && Integer.parseInt(s[2])<255 &&Integer.parseInt(s[3])<255;
+             return Integer.parseInt(s[0])<=255 && Integer.parseInt(s[1])<=255 && Integer.parseInt(s[2])<=255 &&Integer.parseInt(s[3])<=255;
         }
         return false;
     }
