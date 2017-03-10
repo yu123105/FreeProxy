@@ -11,19 +11,14 @@
 
     <artifactId>proxy-scanner</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>../proxy-common</module>
-    </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpasyncclient</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.fish.proxy</groupId>
             <artifactId>proxy-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+
     </dependencies>
 </project>

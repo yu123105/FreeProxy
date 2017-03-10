@@ -1,8 +1,9 @@
 package com.fish.proxy.scanner.component;
 
-import com.fish.proxy.scanner.RequestResult;
-import com.fish.proxy.scanner.ScannerResult;
-import com.fish.proxy.scanner.ScannerTask;
+
+import com.fish.proxy.bean.scanner.RequestResult;
+import com.fish.proxy.bean.scanner.ScannerResult;
+import com.fish.proxy.bean.scanner.ScannerTask;
 
 /**
  * 任务执行器
@@ -18,7 +19,7 @@ public abstract class ScannerTaskExecutor {
     protected ScannerTaskExecutor(RequestResultParser requestResultParser){
         this.requestResultParser = requestResultParser;
     }
-    protected ScannerResult execute(ScannerTask task){
+    public ScannerResult execute(ScannerTask task){
         return requestResultParser.handleRequestResult(task, getData(task));
     }
     protected String getWebsiteUrl(){
