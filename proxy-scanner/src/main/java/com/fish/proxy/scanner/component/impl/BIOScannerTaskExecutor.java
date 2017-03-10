@@ -17,6 +17,9 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
             Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection(proxy);
             connection.setConnectTimeout(3);
+            if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                return new RequestResult(connection.getResponseCode(), null);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

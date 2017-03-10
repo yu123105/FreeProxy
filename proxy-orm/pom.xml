@@ -2,17 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>proxy</artifactId>
+        <groupId>com.fish.proxy</groupId>
+        <version>1.0.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fish.proxy</groupId>
-    <artifactId>proxy</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.0</version>
-    <modules>
-        <module>proxy-scanner</module>
-        <module>proxy-common</module>
-        <module>proxy-orm</module>
-    </modules>
-    
+    <artifactId>proxy-orm</artifactId>
+
 
 </project>
