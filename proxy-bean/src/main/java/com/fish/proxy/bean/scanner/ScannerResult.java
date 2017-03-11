@@ -1,9 +1,11 @@
 package com.fish.proxy.bean.scanner;
 
+import com.fish.proxy.bean.model.BaseModel;
+
 /**
  * 扫描结果
  */
-public class ScannerResult {
+public class ScannerResult extends BaseModel{
     private ScannerTask task;
     private RequestResult requestResult;
 

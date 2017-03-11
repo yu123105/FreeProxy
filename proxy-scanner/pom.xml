@@ -19,6 +19,11 @@
             <artifactId>proxy-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.fish.proxy</groupId>
+            <artifactId>proxy-bean</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 </project>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhibi.rank.dao.impl.NewsDao">
+    <resultMap id="BaseResultMap" type="com.zhibi.rank.domain.domain.News">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="click_count" property="clickCount" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="admin_id" property="adminId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="titleimage" property="titleimage" jdbcType="VARCHAR"/>
+        <result column="able_user_level" property="ableUserLevel" jdbcType="VARCHAR"/>
+        <result column="news_platform" property="newsPlatform" jdbcType="VARCHAR"/>
+        <result column="news_seo_description" property="newsSeoDescription" jdbcType="VARCHAR"/>
+        <result column="news_seo_keyword" property="newsSeoKeyword" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.zhibi.rank.domain.domain.News" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="show_content" property="showContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, click_count, user_id, admin_id, type, status, create_time, begin_time, end_time,
+        remarks, titleimage, able_user_level, news_platform, news_seo_description, news_seo_keyword
+    </sql>
+    <sql id="Blob_Column_List">
+        content,show_content
+    </sql>
+    <select id="findById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from rank_news
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectOne" resultMap="ResultMapWithBLOBs" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from rank_news
+        <where>
+            <if test="id != null">and `id` = #{id,jdbcType=INTEGER}</if>
+            <if test="status != null">and `status` = #{status,jdbcType=INTEGER}</if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.zhibi.rank.domain.domain.News">
+        insert into rank_news (id, title, click_count, user_id,
+        admin_id, type, status,
+        create_time, begin_time, end_time,
+        remarks, content,titleimage,able_user_level, news_platform, news_seo_description, news_seo_keyword)
+        values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{clickCount,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+        #{adminId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+        #{remarks,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},#{titleimage,jdbcType=VARCHAR},
+        #{ableUserLevel,jdbcType=VARCHAR},#{newsPlatform,jdbcType=VARCHAR},
+        #{newsSeoDescription,jdbcType=VARCHAR},#{newsSeoKeyword,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update" parameterType="com.zhibi.rank.domain.domain.News">
+        update rank_news
+        set title = #{title,jdbcType=VARCHAR},
+        click_count = #{clickCount,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=BIGINT},
+        admin_id = #{adminId,jdbcType=BIGINT},
+        type = #{type,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+        remarks = #{remarks,jdbcType=VARCHAR},
+        content = #{content,jdbcType=LONGVARCHAR},
+        able_user_level = #{ableUserLevel,jdbcType=VARCHAR},
+        titleimage = #{titleimage,jdbcType=VARCHAR},
+        news_platform = #{newsPlatform,jdbcType=VARCHAR},
+        news_seo_description = #{newsSeoDescription,jdbcType=VARCHAR},
+        news_seo_keyword = #{newsSeoKeyword,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findByParams" resultMap="ResultMapWithBLOBs" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from `rank_news`
+        <include refid="searchByParams"/>
+        <choose>
+            <when test="orderByClause == null">order by begin_time desc</when>
+            <otherwise>order by ${orderByClause}</otherwise>
+        </choose>
+        <if test="limit != null">limit #{limit}
+            <if test="offset != null">offset #{offset}</if>
+        </if>
+    </select>
+
+    <select id="countByParams" resultType="long" parameterType="map">
+        select count(1) from `rank_news`
+        <include refid="searchByParams"/>
+    </select>
+
+    <select id="selectMaxId" resultType="long" parameterType="map">
+        select max(id) from `rank_news`
+        <include refid="searchByParams"/>
+    </select>
+
+    <select id="getLastNews" resultMap="ResultMapWithBLOBs" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from `rank_news`
+        where `status` = 1
+        and `type` = #{type,jdbcType=INTEGER}
+        and `id` != #{id,jdbcType=INTEGER}
+        and begin_time &lt;= #{beginDate,jdbcType=TIMESTAMP}
+        and begin_time &lt;= #{nowTime,jdbcType=TIMESTAMP}
+        ORDER by begin_time desc
+        limit 1
+    </select>
+
+    <select id="getNextNews" resultMap="ResultMapWithBLOBs" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from `rank_news`
+        where `status` = 1
+        and `type` = #{type,jdbcType=INTEGER}
+        and `id` != #{id,jdbcType=INTEGER}
+        and begin_time &gt;= #{beginDate,jdbcType=TIMESTAMP}
+        and begin_time &lt;= #{nowTime,jdbcType=TIMESTAMP}
+        <if test="lastId != null">and `id` != #{lastId,jdbcType=INTEGER}</if>
+        ORDER by begin_time asc
+        limit 1
+    </select>
+
+    <sql id="searchByParams">
+        <where>
+            <if test="startDate != null">and rank_news.create_time &gt;= #{startDate,jdbcType=TIMESTAMP}</if>
+            <if test="endDate != null">and rank_news.create_time &lt;= #{endDate,jdbcType=TIMESTAMP}</if>
+            <if test="nowTime != null">and rank_news.begin_time &lt;= #{nowTime,jdbcType=TIMESTAMP}</if>
+            <!--<if test="nowTime != null">and rank_news.end_time &gt;=  #{nowTime,jdbcType=TIMESTAMP}</if>-->
+            <if test="status != null">and `status` = #{status,jdbcType=INTEGER}</if>
+            <if test="type != null">and `type` = #{type,jdbcType=INTEGER}</if>
+            <if test="allRead != null">and id &gt; #{allRead,jdbcType=BIGINT}</if>
+            <if test="readId != null">and (select LOCATE(CONCAT(',',id,','), #{readId,jdbcType=VARCHAR})) = 0</if>
+            <if test="mobileAllRead != null">and id &gt; #{mobileAllRead,jdbcType=BIGINT}</if>
+            <if test="mobileReadId != null">and (select LOCATE(CONCAT(',',id,','), #{mobileReadId,jdbcType=VARCHAR})) =
+                0
+            </if>
+            <if test="ableUserLevel != null">and (select FIND_IN_SET(#{ableUserLevel,jdbcType=VARCHAR},able_user_level))
+                &gt; 0
+            </if>
+            <if test="newsPlatform != null">and news_platform = #{newsPlatform,jdbcType=VARCHAR}</if>
+        </where>
+    </sql>
+</mapper>

@@ -11,5 +11,56 @@
 
     <artifactId>proxy-orm</artifactId>
 
+    <properties>
+        <mybatis.version>3.3.0</mybatis.version>
+        <mybatis-spring.version>1.2.3</mybatis-spring.version>
+        <druid.version>1.0.23</druid.version>
+        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+        <mybatis-redis.verison>1.0.0-beta2</mybatis-redis.verison>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.fish.proxy</groupId>
+            <artifactId>proxy-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fish.proxy</groupId>
+            <artifactId>proxy-bean</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fish.proxy</groupId>
+            <artifactId>proxy-bean</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+
+        <!--连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!-- mysql jdbc drive -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+
+    </dependencies>
 </project>
