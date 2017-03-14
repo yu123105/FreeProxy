@@ -14,9 +14,6 @@
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
        default-autowire="byName">
 
-    <!-- property-placeholder is a property finders, locate a properties file, jdbc
-        properties file is stored in a number of connection data -->
-    <!--<context:property-placeholder location="classpath*:*.properties" />-->
 
     <!-- 激活annotation功能 使用annotation自动注册bean，并保证@Required，@Autowired的属性被注入 -->
     <context:component-scan base-package="com.fish.proxy.dao"/>
@@ -82,5 +79,7 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+
 
 </beans>

@@ -30,14 +30,9 @@
             <artifactId>proxy-bean</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.fish.proxy</groupId>
-            <artifactId>proxy-bean</artifactId>
-            <version>1.0.0</version>
-        </dependency>
 
         <!-- mybatis -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
@@ -48,19 +43,19 @@
             <version>${mybatis-spring.version}</version>
         </dependency>
 
-        <!--连接池-->
+        &lt;!&ndash;连接池&ndash;&gt;
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
 
-        <!-- mysql jdbc drive -->
+        &lt;!&ndash; mysql jdbc drive &ndash;&gt;
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 </project>

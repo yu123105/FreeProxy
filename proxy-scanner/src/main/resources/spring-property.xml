@@ -8,7 +8,7 @@
        default-autowire="byName">
 
     <bean id="zookeeperConfigBean" class="com.fish.proxy.bean.config.ZooKeeperPropertiesFactoryBean" lazy-init="false">
-        <property name="zooKeeperUrl" value="zookeeper.fish.config:2181"/>
+        <property name="zooKeeperUrl" value="config.fishruijie.com:2181"/>
         <property name="appName" value="proxy-scanner"/>
     </bean>
 
