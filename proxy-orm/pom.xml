@@ -30,7 +30,10 @@
             <artifactId>proxy-bean</artifactId>
             <version>1.0.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         <!-- mybatis -->
         <!--<dependency>
             <groupId>org.mybatis</groupId>

@@ -5,4 +5,5 @@
 
 
     <import resource="classpath:spring-property.xml"/>
+    <import resource="spring-data-jdbc.xml"/>
 </beans>
