@@ -6,6 +6,7 @@ import com.fish.proxy.bean.scanner.ScannerTask;
 import com.fish.proxy.scanner.component.ScannerTaskExecutor;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.*;
 
 public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
@@ -33,7 +34,16 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
             Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection(proxy);
             connection.setConnectTimeout(5000);
+
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                InputStream stream = connection.getInputStream();
+                String s = "";
+                int i = 0;
+                byte[] buffer = new byte[1024];
+                while ((i = stream.read(buffer)) > 0){
+                    System.out.println(new String(buffer, "UTF-8"));
+                }
+                System.out.println("ok");
                 return new RequestResult(connection.getResponseCode(), null);
             }
         } catch (IOException e) {
@@ -46,6 +56,6 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
     }
 
     public static void main(String[] args) {
-        new BIOScannerTaskExecutor().getData(new ScannerTask("120.26.163.155", 1080));
+        new BIOScannerTaskExecutor().getData(new ScannerTask("207.99.118.74", 8080));
     }
 }

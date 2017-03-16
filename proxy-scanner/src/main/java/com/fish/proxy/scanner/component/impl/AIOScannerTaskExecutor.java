@@ -52,15 +52,19 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
     @Override
     protected RequestResult getData(ScannerTask task) {
         HttpHost proxy = new HttpHost(task.getIp(), task.getPort());
-        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+        RequestConfig config = RequestConfig.custom().setProxy(proxy).setConnectTimeout(5000).build();
         HttpGet request = new HttpGet(getHttpUrl());
         request.setConfig(config);
         HttpGet httpsRequest = new HttpGet(getHttpsUrl());
         httpsRequest.setConfig(config);
         httpclient.execute(request,scannerResultHandler);
         incrementTaskCount();
-        httpclient.execute(httpsRequest, scannerResultHandler);
-        incrementTaskCount();
+        /*httpclient.execute(httpsRequest, scannerResultHandler);
+        incrementTaskCount();*/
         return null;
+    }
+
+    public static void main(String[] args) {
+        new AIOScannerTaskExecutor().getData(new ScannerTask("207.99.118.74", 8080));
     }
 }

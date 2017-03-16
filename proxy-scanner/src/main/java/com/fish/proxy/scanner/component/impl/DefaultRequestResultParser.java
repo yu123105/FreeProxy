@@ -11,6 +11,6 @@ import com.fish.proxy.scanner.component.RequestResultParser;
 public class DefaultRequestResultParser implements RequestResultParser {
     @Override
     public ScannerResult handleRequestResult(ScannerTask task, RequestResult requestResult) {
-        return new ScannerResult(task, requestResult);
+        return new ScannerResult(5000L, false, false, 7, 7, task);
     }
 }

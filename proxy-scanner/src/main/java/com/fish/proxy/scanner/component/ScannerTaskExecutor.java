@@ -21,7 +21,7 @@ public abstract class ScannerTaskExecutor {
     private static final RequestResultParser DEFAULT_PARSER = new DefaultRequestResultParser();
     private static final String HTTP = "http://";
     private static final String HTTPS = "https://";
-    private static final String HOST = "www.chapaiming.com";
+    private static final String HOST = "www.baidu.com";
 
     public abstract void init();
 
