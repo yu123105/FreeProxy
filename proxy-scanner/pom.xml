@@ -25,5 +25,9 @@
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+        </dependency>
     </dependencies>
 </project>

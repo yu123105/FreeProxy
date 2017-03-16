@@ -1,6 +1,7 @@
 package com.fish.proxy.scanner.component.impl;
 
 import com.fish.proxy.bean.scanner.RequestResult;
+import com.fish.proxy.bean.scanner.ScannerResult;
 import com.fish.proxy.bean.scanner.ScannerTask;
 import com.fish.proxy.scanner.component.ScannerTaskExecutor;
 
@@ -10,13 +11,27 @@ import java.net.*;
 public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
 
     @Override
+    public void init() {
+
+    }
+
+    @Override
+    public ScannerResult executeTask(ScannerTask task) {
+        return requestResultParser.handleRequestResult(task, getData(task));
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
     protected RequestResult getData(ScannerTask task) {
         try {
-            URL url = new URL(getWebsiteUrl());
+            URL url = new URL(getHttpUrl());
             InetSocketAddress address = new InetSocketAddress(task.getIp(), task.getPort());
             Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection(proxy);
-            //HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setConnectTimeout(5000);
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
                 return new RequestResult(connection.getResponseCode(), null);
