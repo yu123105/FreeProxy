@@ -26,6 +26,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <http-async-client.version>4.1.3</http-async-client.version>
+        <spring-data-redis.version>1.8.1.RELEASE</spring-data-redis.version>
     </properties>
     <groupId>com.fish.proxy</groupId>
     <artifactId>proxy</artifactId>
@@ -43,6 +44,12 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpasyncclient</artifactId>
                 <version>${http-async-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring-data-redis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

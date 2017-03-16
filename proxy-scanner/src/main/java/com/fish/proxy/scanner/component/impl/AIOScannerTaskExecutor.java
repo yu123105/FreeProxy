@@ -11,10 +11,13 @@ import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
 
     private CloseableHttpAsyncClient httpclient;
+
+    private CountDownLatch stopLatch;
 
     @Override
     public void init() {
@@ -25,6 +28,19 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
 
     public AIOScannerTaskExecutor(){
         init();
+    }
+
+    @Override
+    public void executeTaskWithFactory(){
+        stopLatch = new CountDownLatch(1);
+        while (!isStopped()){
+            asyncExecuteTask(scannerTaskFactory.createTask());
+        }
+        try {
+            stopLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -46,6 +62,8 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
             httpclient.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            stopLatch.countDown();
         }
     }
 

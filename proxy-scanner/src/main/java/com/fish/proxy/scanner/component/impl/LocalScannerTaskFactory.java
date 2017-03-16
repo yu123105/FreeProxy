@@ -10,38 +10,12 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by Administrator on 2017/3/9.
  */
-public class LocalScannerTaskFactory implements ScannerTaskFactory {
-    private static Integer portPoint = 0;
-    private static Integer[] ports = new Integer[]{80,81,82,90,3128,7000,8000,8080,8081,9000};
-    private IpIterator ipIterator = new IpIterator("1.12.0.255", "1.15.255.255");
-    Lock lock = new ReentrantLock();
-    public ScannerTask getTask() {
+public class LocalScannerTaskFactory extends AbstractScannerTaskFactory {
+
+     public ScannerTask getTask() {
         if(hasMoreTask()){
             return createTask();
         }
         return null;
-    }
-
-    public Boolean hasMoreTask() {
-        return (ipIterator.hasNextIp() || portPoint < ports.length);
-    }
-
-    public ScannerTask createTask() {
-        try {
-            lock.lock();
-            if(!hasMoreTask()){
-                return null;
-            }
-            String ip = ipIterator.getCurrentIp();
-            if(portPoint > ports.length - 1){
-                portPoint %= (ports.length - 1);
-                ip = ipIterator.getNextIp();
-            }
-            ScannerTask task = new ScannerTask(ip, ports[portPoint]);
-            portPoint++;
-            return task;
-        }finally {
-            lock.unlock();
-        }
     }
 }
