@@ -7,9 +7,13 @@ public class IpIterator {
     private Integer[] minIpData;
     private Integer[] maxIpData;
     private Integer[] currentIpData;
+    private String minIp;
+    private String maxIp;
     private IpIterator(){}
     public IpIterator(String minIp, String maxIp){
         if(IpOperations.isIpStrValid(minIp) && IpOperations.isIpStrValid(maxIp)){
+            this.minIp = minIp;
+            this.maxIp = maxIp;
             minIpData = IpOperations.strIp2IntArray(minIp);
             maxIpData = IpOperations.strIp2IntArray(maxIp);
             currentIpData = Arrays.copyOf(minIpData, minIpData.length);
@@ -38,5 +42,19 @@ public class IpIterator {
         return (currentIpData[0] < maxIpData[0] || currentIpData[1] < maxIpData[1] || currentIpData[2] < maxIpData[2] || currentIpData[3] < maxIpData[3]);
     }
 
+    public String getMinIp() {
+        return minIp;
+    }
 
+    public void setMinIp(String minIp) {
+        this.minIp = minIp;
+    }
+
+    public String getMaxIp() {
+        return maxIp;
+    }
+
+    public void setMaxIp(String maxIp) {
+        this.maxIp = maxIp;
+    }
 }

@@ -2,6 +2,7 @@ package com.fish.proxy.scanner.component.impl;
 
 import com.fish.proxy.bean.scanner.ScannerTask;
 import com.fish.proxy.repositories.RemoteIpRepository;
+import com.fish.proxy.scanner.component.AbstractScannerTaskFactory;
 import com.fish.proxy.utils.IpIterator;
 import com.fish.proxy.utils.IpOperations;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -77,8 +77,8 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
         httpsRequest.setConfig(config);
         httpclient.execute(request,scannerResultHandler);
         incrementTaskCount();
-        /*httpclient.execute(httpsRequest, scannerResultHandler);
-        incrementTaskCount();*/
+        httpclient.execute(httpsRequest, scannerResultHandler);
+        incrementTaskCount();
         return null;
     }
 

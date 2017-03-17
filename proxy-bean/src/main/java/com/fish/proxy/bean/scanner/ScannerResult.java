@@ -31,6 +31,13 @@ public class ScannerResult extends BaseModel{
 
     private ScannerTask task;
 
+    private Integer status;
+
+
+    private Integer proxyType;
+
+
+
 
     protected ScannerResult(){}
 
@@ -100,4 +107,19 @@ public class ScannerResult extends BaseModel{
         this.task = task;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getProxyType() {
+        return proxyType;
+    }
+
+    public void setProxyType(Integer proxyType) {
+        this.proxyType = proxyType;
+    }
 }

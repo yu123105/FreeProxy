@@ -9,10 +9,6 @@ import org.omg.CORBA.portable.OutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-
-/**
- * Created by Administrator on 2017/3/10.
- */
 public class NormalScannerResultHandler implements ScannerResultHandler<HttpResponse> {
 
     private ScannerTaskExecutor scannerTaskExecutor;

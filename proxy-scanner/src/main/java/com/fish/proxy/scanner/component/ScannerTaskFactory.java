@@ -7,4 +7,7 @@ public interface ScannerTaskFactory {
     ScannerTask getTask();
     Boolean hasMoreTask();
     ScannerTask createTask();
+    String getCurrentTaskIP();
+    String getMinTaskIP();
+    String getMaxTaskIP();
 }

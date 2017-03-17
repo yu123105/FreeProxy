@@ -35,9 +35,11 @@ public abstract class ScannerTaskExecutor {
 
 
     public Integer incrementTaskCount(){
+        System.out.println("---------------------------------------------------------------------------increment");
         return runningTaskCount.incrementAndGet();
     }
     public Integer decrementTaskCount(){
+        System.out.println("---------------------------------------------------------------------------decrement");
         return runningTaskCount.decrementAndGet();
     }
     public Integer getRunningTaskCount(){

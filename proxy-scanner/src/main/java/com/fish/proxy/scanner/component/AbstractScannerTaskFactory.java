@@ -1,4 +1,4 @@
-package com.fish.proxy.scanner.component.impl;
+package com.fish.proxy.scanner.component;
 
 
 import com.fish.proxy.bean.scanner.ScannerTask;
@@ -15,9 +15,20 @@ public abstract class AbstractScannerTaskFactory implements ScannerTaskFactory{
     protected IpIterator ipIterator;
     Lock lock = new ReentrantLock();
 
-
-
     public abstract ScannerTask getTask();
+
+    @Override
+    public String getCurrentTaskIP(){
+        return ipIterator.getCurrentIp();
+    }
+    @Override
+    public String getMinTaskIP(){
+        return ipIterator.getMinIp();
+    }
+    @Override
+    public String getMaxTaskIP(){
+        return ipIterator.getMaxIp();
+    }
 
     @Override
     public Boolean hasMoreTask() {
