@@ -38,7 +38,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>proxy-web</finalName>
+        <finalName>proxy-scanner</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
