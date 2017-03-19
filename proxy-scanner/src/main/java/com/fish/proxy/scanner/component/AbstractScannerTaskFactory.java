@@ -50,7 +50,6 @@ public abstract class AbstractScannerTaskFactory implements ScannerTaskFactory{
                 ip = ipIterator.getNextIp();
             }
             ScannerTask task = new ScannerTask(ip, ports[portPoint]);
-            System.out.println(ip + ":" + ports[portPoint]);
             portPoint++;
             return task;
         } finally {
