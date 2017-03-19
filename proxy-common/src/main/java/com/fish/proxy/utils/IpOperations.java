@@ -8,6 +8,8 @@ public class IpOperations {
         ONE,TWO,THREE,FOUR
     }
 
+    public static final Step step = Step.TWO;
+
     public static Boolean isIpStrValid(String ip){
         if(ip == null){
             return false;

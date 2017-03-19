@@ -42,7 +42,7 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
     public void executeTaskWithFactory(){
         stopLatch = new CountDownLatch(1);
         while (!isStopped()){
-            asyncExecuteTask(scannerTaskFactory.createTask());
+            asyncExecuteTask(scannerTaskFactory.getTask());
         }
         try {
             stopLatch.await();

@@ -25,10 +25,12 @@ public abstract class ScannerTaskExecutor {
     private static final String HTTP = "http";
     private static final String HTTPS = "https";
     private static final String HOST = "23.83.238.104";
+    //private static final String HOST = "127.0.0.1";
     private static final String PATH = "/proxy-record";
     private static final String SERVER_MESSAGE_PATH = "/server-message";
     private static final Integer PORT = 8080;
     private static Long serverTime;
+    private static Long diff;
     private static String localIp;
 
     public abstract void init();
@@ -43,11 +45,11 @@ public abstract class ScannerTaskExecutor {
 
 
     public Integer incrementTaskCount(){
-        System.out.println("---------------------------------------------------------------------------increment");
+        System.out.println("-------------------------------------increment--------------------------------------" + runningTaskCount.get());
         return runningTaskCount.incrementAndGet();
     }
     public Integer decrementTaskCount(){
-        System.out.println("---------------------------------------------------------------------------decrement");
+        System.out.println("-------------------------------------decrement--------------------------------------" + runningTaskCount.get());
         return runningTaskCount.decrementAndGet();
     }
     public Integer getRunningTaskCount(){
@@ -69,7 +71,7 @@ public abstract class ScannerTaskExecutor {
         URIBuilder builder = new URIBuilder();
         try {
             return builder.setScheme(HTTP).setHost(HOST).setPort(PORT).setPath(PATH)
-                    .setParameter("time", serverTime+"")
+                    .setParameter("time", System.currentTimeMillis() + diff + "")
                     .setParameter("localIp", localIp)
                     .setParameter("proxyIp",proxyIp)
                     .setParameter("port", port+"").build();
@@ -82,7 +84,7 @@ public abstract class ScannerTaskExecutor {
         URIBuilder builder = new URIBuilder();
         try {
             return builder.setScheme(HTTPS).setHost(HOST).setPort(PORT).setPath(PATH)
-                    .setParameter("time", serverTime+"")
+                    .setParameter("time", System.currentTimeMillis() + diff +"")
                     .setParameter("localIp", localIp)
                     .setParameter("proxyIp",proxyIp)
                     .setParameter("port", port+"").build();
@@ -107,14 +109,17 @@ public abstract class ScannerTaskExecutor {
             connection.setConnectTimeout(5000);
 
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                Long time = System.currentTimeMillis();
                 InputStream stream = connection.getInputStream();
-                String s = "";
-                byte[] buffer = new byte[1024];
-                while ((stream.read(buffer)) > 0){
-                    s += new String(buffer, "UTF-8");
+                StringBuffer   out   =   new   StringBuffer();
+                byte[] buffer = new byte[2048];
+                for(int i; (i = stream.read(buffer)) != -1; ){
+                    out.append(new String(buffer, 0, i, "UTF-8"));
                 }
+               String s = out.toString();
                 Map map = (Map)JSONObject.parse(s);
                 serverTime = (Long)map.get("time");
+                diff = serverTime - time;
                 localIp = (String)map.get("localIp");
             }
         } catch (IOException e) {

@@ -16,20 +16,30 @@ public class RemoteScannerTaskFactory extends AbstractScannerTaskFactory {
     @Autowired
     private RemoteIpRepository remoteIpRepositoryImpl;
 
+
+
     @PostConstruct
     public void init(){
         String ip = remoteIpRepositoryImpl.getNextRemoteIp();
-        ipIterator = new IpIterator(ip, IpOperations.nextIp(ip, IpOperations.Step.TWO));
+        ipIterator = new IpIterator(ip, IpOperations.nextIp(ip, IpOperations.step));
     }
 
     @Override
     public ScannerTask getTask() {
+        ScannerTask task = null;
         if(hasMoreTask()){
-            return createTask();
-        }else {
-            String ip = remoteIpRepositoryImpl.getNextRemoteIp();
-            ipIterator = new IpIterator(ip, IpOperations.nextIp(ip, IpOperations.Step.TWO));
-            return createTask();
+            task = createTask();
         }
+        if(task == null){
+            try {
+                lock.lock();
+                String ip = remoteIpRepositoryImpl.getNextRemoteIp();
+                ipIterator = new IpIterator(ip, IpOperations.nextIp(ip, IpOperations.step));
+                task = createTask();
+            }finally {
+                lock.unlock();
+            }
+        }
+        return task;
     }
 }
