@@ -44,7 +44,7 @@ public class ProxyController {
             return;
         }
 
-        ScannerResult result = scannerResultRepository.findByIp(proxyIp);
+        ScannerResult result = scannerResultRepository.findByTaskIp(proxyIp);
         result = result == null ? new ScannerResult() : result;
 
         String via = request.getHeader("via");

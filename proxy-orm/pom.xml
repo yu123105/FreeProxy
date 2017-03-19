@@ -20,9 +20,11 @@
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>com.fish.proxy</groupId>
+            <artifactId>proxy-bean</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.fish.proxy</groupId>
@@ -30,9 +32,8 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>com.fish.proxy</groupId>
-            <artifactId>proxy-bean</artifactId>
-            <version>1.0.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -41,6 +42,10 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
         </dependency>
         <!-- mybatis -->
         <!--<dependency>

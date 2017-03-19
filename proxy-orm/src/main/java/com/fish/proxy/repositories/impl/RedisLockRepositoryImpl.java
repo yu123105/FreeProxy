@@ -11,17 +11,17 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Repository
-public class RedisLockRepositoyImpl implements RedisLockRepository {
+public class RedisLockRepositoryImpl implements RedisLockRepository {
 
     private static final String KEY = "REDIS_LOCK";
-    private static final Integer VALUE = 1;
+    private static final String VALUE = "1";
     private static final Integer TRY_TIMES = 3;
 
-    private RedisTemplate<String, Integer> redisTemplate;
-    private ListOperations<String, Integer> listOps;
+    private RedisTemplate<String, String> redisTemplate;
+    private ListOperations<String, String> listOps;
 
     @Autowired
-    private RedisLockRepositoyImpl(RedisTemplate redisTemplate) {
+    private RedisLockRepositoryImpl(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

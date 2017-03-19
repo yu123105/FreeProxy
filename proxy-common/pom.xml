@@ -10,7 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>proxy-common</artifactId>
-    <packaging>pom</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.fish.proxy</groupId>
+            <artifactId>proxy-bean</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -3,6 +3,7 @@ package com.fish.test;
 import com.fish.proxy.bean.scanner.RequestResult;
 import com.fish.proxy.bean.scanner.ScannerResult;
 import com.fish.proxy.bean.scanner.ScannerTask;
+import com.fish.proxy.repositories.RedisLockRepository;
 import com.fish.proxy.repositories.ScannerResultRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 引入Spring-Test框架支持
@@ -22,6 +24,9 @@ public class JPATest extends AbstractJUnit4SpringContextTests {
     @Autowired
     ScannerResultRepository scannerResultRepository;
 
+    @Autowired
+    RedisLockRepository redisLockRepository;
+
     @Test
     public void testJpa(){
         /*scannerResultRepository.
@@ -30,4 +35,9 @@ public class JPATest extends AbstractJUnit4SpringContextTests {
     }
 
 
+    @Test
+    public void testRedis() throws IOException {
+        redisLockRepository.releaseLock();
+        //redisLockRepository.getLock();
+    }
 }
