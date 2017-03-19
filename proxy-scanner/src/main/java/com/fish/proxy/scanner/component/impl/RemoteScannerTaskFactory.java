@@ -6,9 +6,11 @@ import com.fish.proxy.scanner.component.AbstractScannerTaskFactory;
 import com.fish.proxy.utils.IpIterator;
 import com.fish.proxy.utils.IpOperations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+@Component
 public class RemoteScannerTaskFactory extends AbstractScannerTaskFactory {
 
     @Autowired

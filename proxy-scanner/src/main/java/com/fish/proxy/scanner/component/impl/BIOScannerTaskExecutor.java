@@ -13,12 +13,12 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
 
     @Override
     public void init() {
-
+        getServerMessage();
     }
 
     @Override
-    public ScannerResult executeTask(ScannerTask task) {
-        return requestResultParser.handleRequestResult(task, getData(task));
+    public void executeTask(ScannerTask task) {
+        getData(task);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
     @Override
     protected RequestResult getData(ScannerTask task) {
         try {
-            URL url = new URL(getHttpUrl());
+            URL url = getHttpUrl(task.getIp(), task.getPort()).toURL();
             InetSocketAddress address = new InetSocketAddress(task.getIp(), task.getPort());
             Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection(proxy);
@@ -56,6 +56,6 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
     }
 
     public static void main(String[] args) {
-        new BIOScannerTaskExecutor().getData(new ScannerTask("207.99.118.74", 8080));
+        new BIOScannerTaskExecutor().getData(new ScannerTask("191.96.43.86", 8080));
     }
 }

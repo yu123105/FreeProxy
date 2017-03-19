@@ -1,38 +1,39 @@
 package com.fish.proxy.scanner;
 
-import com.fish.proxy.scanner.component.ScannerResultHandler;
 import com.fish.proxy.scanner.component.ScannerTaskExecutor;
-import com.fish.proxy.scanner.component.ScannerTaskFactory;
-import com.fish.proxy.scanner.component.impl.BIOScannerTaskExecutor;
-import com.fish.proxy.scanner.component.impl.LocalScannerTaskFactory;
-import com.fish.proxy.scanner.component.impl.NormalScannerResultHandler;
+import com.fish.proxy.scanner.component.impl.AIOScannerTaskExecutor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class ProxyScanner {
+//@EnableAutoConfiguration
+@Component
+@ComponentScan
+public class ProxyScanner{
+
+    @Autowired
+    private ScannerTaskExecutor aIOScannerTaskExecutor;
 
     public ProxyScanner(){
+
     }
 
-
-
     public void start(){
-        int poolSize = 1000;
-        ExecutorService service = Executors.newFixedThreadPool(poolSize);
-        for(int i = 0; i < poolSize; i++){
-            service.execute(new Runnable() {
-                @Override
-                public void run() {
-                    while (true){
-                        //scannerTaskExecutor.execute(scannerTaskFactory.createTask());
-                    }
-                }
-            });
-        }
+        System.out.println("11111111111111111111111111111111111111111111111111111");
+        //aIOScannerTaskExecutor.executeTaskWithFactory();
     }
 
     public static void main(String[] args) {
-        new ProxyScanner().start();
+        ConfigurableApplicationContext ctx = SpringApplication.run(ProxyScanner.class);
+        ProxyScanner proxyScanner = ctx.getBean(ProxyScanner.class);
+        proxyScanner.start();
+
     }
 }

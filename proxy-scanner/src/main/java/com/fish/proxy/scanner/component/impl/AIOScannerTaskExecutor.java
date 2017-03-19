@@ -4,15 +4,18 @@ package com.fish.proxy.scanner.component.impl;
 import com.fish.proxy.bean.scanner.RequestResult;
 import com.fish.proxy.bean.scanner.ScannerTask;
 import com.fish.proxy.scanner.component.ScannerTaskExecutor;
+import com.fish.proxy.scanner.component.ScannerTaskFactory;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
-
+@Component
 public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
 
     private CloseableHttpAsyncClient httpclient;
@@ -21,11 +24,16 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
 
     @Override
     public void init() {
+        getServerMessage();
         httpclient = HttpAsyncClients.createDefault();
         httpclient.start();
         scannerResultHandler = new NormalScannerResultHandler(this);
     }
 
+    @Autowired
+    public void setScannerTaskFactory(ScannerTaskFactory remoteScannerTaskFactory){
+        this.scannerTaskFactory = remoteScannerTaskFactory;
+    }
     public AIOScannerTaskExecutor(){
         init();
     }
@@ -70,10 +78,14 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
     @Override
     protected RequestResult getData(ScannerTask task) {
         HttpHost proxy = new HttpHost(task.getIp(), task.getPort());
-        RequestConfig config = RequestConfig.custom().setProxy(proxy).setConnectTimeout(5000).build();
-        HttpGet request = new HttpGet(getHttpUrl());
+        RequestConfig config = RequestConfig.custom()
+                .setProxy(proxy)
+                .setConnectTimeout(5000)
+                .build();
+
+        HttpGet request = new HttpGet(getHttpUrl(task.getIp(), task.getPort()));
         request.setConfig(config);
-        HttpGet httpsRequest = new HttpGet(getHttpsUrl());
+        HttpGet httpsRequest = new HttpGet(getHttpsUrl(task.getIp(), task.getPort()));
         httpsRequest.setConfig(config);
         httpclient.execute(request,scannerResultHandler);
         incrementTaskCount();

@@ -1,12 +1,14 @@
 package com.fish.proxy.bean.scanner;
 
 
+import com.fish.proxy.bean.enums.AnonymousLevel;
+import com.fish.proxy.bean.enums.ProxyStatus;
+import com.fish.proxy.bean.enums.ProxySupportProtocol;
+import com.fish.proxy.bean.enums.ProxyType;
 import com.fish.proxy.bean.model.BaseModel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 扫描结果
@@ -21,33 +23,49 @@ public class ScannerResult extends BaseModel{
 
     private Long delayTime;
 
-    private Boolean emberCss;
-
-    private Boolean emberJs;
-
-    private Integer supportType;
-
-    private Integer anonymous;
+    private Date updateTime;
 
     private ScannerTask task;
 
-    private Integer status;
+    @Enumerated(EnumType.ORDINAL)
+    private ProxySupportProtocol supportType;
+
+    @Enumerated(EnumType.ORDINAL)
+    private AnonymousLevel anonymous;
+
+    @Enumerated(EnumType.ORDINAL)
+    private ProxyStatus status;
+
+    @Enumerated(EnumType.ORDINAL)
+    private ProxyType proxyType;
+
+    public ScannerResult(){}
 
 
-    private Integer proxyType;
-
-
-
-
-    protected ScannerResult(){}
-
-    public ScannerResult(Long delayTime, Boolean emberCss, Boolean emberJs, Integer supportType, Integer anonymous, ScannerTask task) {
+    public ScannerResult(Long delayTime, ProxySupportProtocol supportType, AnonymousLevel anonymous, ScannerTask task, ProxyStatus status, Date updateTime, ProxyType proxyType) {
         this.delayTime = delayTime;
-        this.emberCss = emberCss;
-        this.emberJs = emberJs;
         this.supportType = supportType;
         this.anonymous = anonymous;
         this.task = task;
+        this.status = status;
+        this.updateTime = updateTime;
+        this.proxyType = proxyType;
+    }
+
+    public ProxyType getProxyType() {
+        return proxyType;
+    }
+
+    public void setProxyType(ProxyType proxyType) {
+        this.proxyType = proxyType;
+    }
+
+    public ProxySupportProtocol getSupportType() {
+        return supportType;
+    }
+
+    public void setSupportType(ProxySupportProtocol supportType) {
+        this.supportType = supportType;
     }
 
     public Long getId() {
@@ -66,38 +84,13 @@ public class ScannerResult extends BaseModel{
         this.delayTime = delayTime;
     }
 
-    public Boolean getEmberCss() {
-        return emberCss;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setEmberCss(Boolean emberCss) {
-        this.emberCss = emberCss;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
-
-    public Boolean getEmberJs() {
-        return emberJs;
-    }
-
-    public void setEmberJs(Boolean emberJs) {
-        this.emberJs = emberJs;
-    }
-
-    public Integer getSupportType() {
-        return supportType;
-    }
-
-    public void setSupportType(Integer supportType) {
-        this.supportType = supportType;
-    }
-
-    public Integer getAnonymous() {
-        return anonymous;
-    }
-
-    public void setAnonymous(Integer anonymous) {
-        this.anonymous = anonymous;
-    }
-
 
     public ScannerTask getTask() {
         return task;
@@ -107,19 +100,19 @@ public class ScannerResult extends BaseModel{
         this.task = task;
     }
 
-    public Integer getStatus() {
+    public AnonymousLevel getAnonymous() {
+        return anonymous;
+    }
+
+    public void setAnonymous(AnonymousLevel anonymous) {
+        this.anonymous = anonymous;
+    }
+
+    public ProxyStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(ProxyStatus status) {
         this.status = status;
-    }
-
-    public Integer getProxyType() {
-        return proxyType;
-    }
-
-    public void setProxyType(Integer proxyType) {
-        this.proxyType = proxyType;
     }
 }
