@@ -55,7 +55,7 @@ public class BIOScannerTaskExecutor extends ScannerTaskExecutor {
         return new RequestResult(HttpURLConnection.HTTP_BAD_REQUEST, null);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new BIOScannerTaskExecutor().getData(new ScannerTask("191.96.43.86", 8080));
-    }
+    }*/
 }

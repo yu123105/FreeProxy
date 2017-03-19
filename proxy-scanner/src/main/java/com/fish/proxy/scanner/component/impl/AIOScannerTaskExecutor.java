@@ -94,7 +94,7 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
         return null;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new AIOScannerTaskExecutor().getData(new ScannerTask("207.99.118.74", 8080));
-    }
+    }*/
 }
