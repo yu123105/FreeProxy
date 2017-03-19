@@ -31,7 +31,8 @@
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <!-- 连接池配置. -->
         <property name="poolConfig" ref="jedisPoolConfig"/>
-
+        <!--timeout-->
+        <property name="timeout" value="60000"/>
         <property name="hostName" value="${redis.hostname}"/>
         <property name="usePool" value="true"/>
         <property name="port" value="${redis.port}"/>
