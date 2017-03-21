@@ -68,9 +68,9 @@ public class IpOperations {
             data[0] += step;
         }
         data[0] %= 255;
-        return compositData(data);
+        return compositeData(data);
     }
-    public static String compositData(Integer data[]){
+    public static String compositeData(Integer data[]){
         if(data == null || data.length < 4){
             return null;
         }

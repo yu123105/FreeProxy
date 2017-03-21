@@ -33,7 +33,7 @@ public class IpIterator {
             currentIpData[1] %= 255;
             currentIpData[0]++;
         }
-        return IpOperations.compositData(currentIpData);
+        return IpOperations.compositeData(currentIpData);
     }
     public String getCurrentIp(){
         return currentIpData[0] + "." + currentIpData[1] + "." + currentIpData[2] + "." + currentIpData[3];
