@@ -44,7 +44,7 @@ public class RemoteIpRepositoryImpl implements RemoteIpRepository{
         try {
             redisLockRepository.getLock();
             String currentIp = getCurrentRemoteIp();
-            String nextIp = IpOperations.nextIp(currentIp, IpOperations.step);
+            String nextIp = IpOperations.nextIp(currentIp, IpOperations.INDEX, IpOperations.STEP);
             valueOps.set(KEY, nextIp);
             return nextIp;
         } catch (IOException e) {

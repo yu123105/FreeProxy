@@ -4,11 +4,13 @@ package com.fish.proxy.utils;
 public class IpOperations {
     public final static String DEFAULT_MIN_IP= "0.0.0.0";
 
-    public enum Step{
+    public enum Index{
         ONE,TWO,THREE,FOUR
     }
 
-    public static final Step step = Step.TWO;
+    public static final Index INDEX = Index.TWO;
+
+    public static final Integer STEP = 50;
 
     public static Boolean isIpStrValid(String ip){
         if(ip == null){
@@ -31,39 +33,39 @@ public class IpOperations {
         return data;
     }
 
-    public static String nextIp(String ip, Step step){
+    public static String nextIp(String ip, Index index, Integer step){
         if(!isIpStrValid(ip)){
             return DEFAULT_MIN_IP;
         }
         Integer[] data = strIp2IntArray(ip);
-        return nextIpByData(data, step);
+        return nextIpByData(data, index, step);
 
     }
-    private static String nextIpByData(Integer[] data, Step step){
-        step = step == null ? Step.ONE : step;
-        if(step.equals(Step.ONE)){
-            data[3]++;
+    private static String nextIpByData(Integer[] data, Index index, Integer step){
+        index = index == null ? Index.ONE : index;
+        if(index.equals(Index.ONE)){
+            data[3] += step;
         }
         if(data[3] > 255){
             data[3] %= 255;
             data[2]++;
         }
-        if(step.equals(Step.TWO)){
-            data[2]++;
+        if(index.equals(Index.TWO)){
+            data[2] += step;
         }
         if(data[2] > 255){
             data[2] %= 255;
             data[1]++;
         }
-        if(step.equals(Step.THREE)){
-            data[1]++;
+        if(index.equals(Index.THREE)){
+            data[1] += step;
         }
         if(data[1] > 255){
             data[1] %= 255;
             data[0]++;
         }
-        if(step.equals(Step.FOUR)){
-            data[0]++;
+        if(index.equals(Index.FOUR)){
+            data[0] += step;
         }
         data[0] %= 255;
         return compositData(data);
