@@ -3,13 +3,16 @@ package com.fish.proxy.scanner.component.impl;
 
 import com.fish.proxy.bean.scanner.RequestResult;
 import com.fish.proxy.bean.scanner.ScannerTask;
+import com.fish.proxy.scanner.client.NIdleConnectionEvictor;
 import com.fish.proxy.scanner.component.ScannerTaskExecutor;
 import com.fish.proxy.scanner.component.ScannerTaskFactory;
+import com.fish.proxy.utils.IpOperations;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.concurrent.FutureCallback;
+import org.apache.http.impl.client.IdleConnectionEvictor;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager;
@@ -30,24 +33,22 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
     private CloseableHttpAsyncClient httpclient;
 
     private CountDownLatch stopLatch;
-    private ConnectingIOReactor ioReactor;
-    private PoolingNHttpClientConnectionManager cm;
     @Override
     public void init() {
         try {
             getServerMessage();
-            httpclient = HttpAsyncClients.createDefault();
-            httpclient.start();
-            scannerResultHandler = new NormalScannerResultHandler(this);
-            ioReactor = new DefaultConnectingIOReactor();
-            cm = new PoolingNHttpClientConnectionManager(ioReactor);
-            cm.setMaxTotal(100);
+            PoolingNHttpClientConnectionManager cm = new PoolingNHttpClientConnectionManager(new DefaultConnectingIOReactor());
+            cm.setMaxTotal(1000);
+            NIdleConnectionEvictor connEvictor = new NIdleConnectionEvictor(cm, 5, TimeUnit.SECONDS);
             httpclient = HttpAsyncClients.custom().setConnectionManager(cm).build();
             httpclient.start();
+            connEvictor.start();
         } catch (IOReactorException e) {
             e.printStackTrace();
         }
-
+        /*getServerMessage();
+        httpclient = HttpAsyncClients.createDefault();
+        httpclient.start();*/
     }
 
     @Autowired
@@ -148,7 +149,16 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
         return null;
     }
 
-    /*public static void main(String[] args) {
-        new AIOScannerTaskExecutor().getData(new ScannerTask("207.99.118.74", 8080));
-    }*/
+    public static void main(String[] args) {
+        AIOScannerTaskExecutor scannerTaskExecutor = new AIOScannerTaskExecutor();
+        scannerTaskExecutor.init();
+        String ip = "1.4.174.53";
+        Boolean run = true;
+        while (true){
+            scannerTaskExecutor.getData(new ScannerTask(ip, 8080));
+            ip = IpOperations.nextIp(ip, IpOperations.Index.ONE, 1);
+        }
+
+
+    }
 }
