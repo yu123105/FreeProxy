@@ -149,7 +149,7 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
         return null;
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         AIOScannerTaskExecutor scannerTaskExecutor = new AIOScannerTaskExecutor();
         scannerTaskExecutor.init();
         String ip = "1.4.174.53";
@@ -160,5 +160,5 @@ public class AIOScannerTaskExecutor extends ScannerTaskExecutor{
         }
 
 
-    }
+    }*/
 }
