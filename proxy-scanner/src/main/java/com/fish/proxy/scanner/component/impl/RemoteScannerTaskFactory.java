@@ -33,7 +33,10 @@ public class RemoteScannerTaskFactory extends AbstractScannerTaskFactory {
         if(task == null){
             try {
                 lock.lock();
-                String ip = remoteIpRepositoryImpl.getNextRemoteIp();
+                String ip = null;
+                while (ip == null){
+                    ip = remoteIpRepositoryImpl.getNextRemoteIp();
+                }
                 System.out.println(ip);
                 ipIterator = new IpIterator(ip, IpOperations.nextIp(ip, IpOperations.INDEX, IpOperations.STEP));
                 task = createTask();
